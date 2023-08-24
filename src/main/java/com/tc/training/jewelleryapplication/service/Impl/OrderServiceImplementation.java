@@ -64,4 +64,16 @@ public class OrderServiceImplementation implements OrderService {
     public Order cancledOrder(Long orderId) throws OrderException {
         return null;
     }
+
+    @Override
+    public void deleteOrder(Long orderId) throws OrderException {
+
+
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+
+        return null;
+    }
 }
