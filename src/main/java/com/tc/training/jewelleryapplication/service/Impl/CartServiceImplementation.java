@@ -10,7 +10,9 @@ import com.tc.training.jewelleryapplication.request.AddItemRequest;
 import com.tc.training.jewelleryapplication.service.CartItemService;
 import com.tc.training.jewelleryapplication.service.CartService;
 import com.tc.training.jewelleryapplication.service.ProductService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CartServiceImplementation implements CartService {
 
     private CartRepository cartRepository;
