@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class Order {
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-    private List<OrderItems> orderItems=new ArrayList<>();
+    private List<OrderItem> orderItems=new ArrayList<>();
     private LocalDateTime orderDate;
     private LocalDateTime deliveryDate;
 

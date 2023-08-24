@@ -41,12 +41,12 @@ public class OrderServiceImplementation implements OrderService {
     }
 
     @Override
-    public Order placedOrder(Long order) throws OrderException {
+    public Order placedOrder(Long orderId) throws OrderException {
         return null;
     }
 
     @Override
-    public Order confirmedOrder(Long OrderId) throws OrderException {
+    public Order confirmedOrder(Long orderId) throws OrderException {
         return null;
     }
 
