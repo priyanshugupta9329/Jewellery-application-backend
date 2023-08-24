@@ -104,6 +104,7 @@ public class OrderServiceImplementation implements OrderService {
         order.setOrderStatus("PLACED");
         order.getPaymentDetails().setStatus("COMPLETED");
         return order;
+
     }
 
     @Override
@@ -112,6 +113,7 @@ public class OrderServiceImplementation implements OrderService {
         Order order = findOrderById(orderId);
         order.setOrderStatus("CONFIRMED");
         return orderRepository.save(order);
+
     }
 
     @Override
