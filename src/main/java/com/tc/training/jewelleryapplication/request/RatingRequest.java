@@ -1,24 +1,14 @@
 package com.tc.training.jewelleryapplication.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 public class RatingRequest {
 
     private Long producrId;
     private double rating;
 
 
-    public Long getProducrId() {
-        return producrId;
-    }
-
-    public void setProducrId(Long producrId) {
-        this.producrId = producrId;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
 }

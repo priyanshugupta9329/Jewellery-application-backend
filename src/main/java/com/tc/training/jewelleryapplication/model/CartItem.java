@@ -2,8 +2,14 @@ package com.tc.training.jewelleryapplication.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,82 +29,5 @@ public class CartItem {
     private Integer discountPrice;
     private Long userId;
 
-    public CartItem() {
 
-    }
-
-    public CartItem(Long id, Cart cart, Product product, String size, int quantity, Integer price, Integer discountPrice, Long userId) {
-        this.id = id;
-        this.cart = cart;
-        this.product = product;
-        this.size = size;
-        this.quantity = quantity;
-        this.price = price;
-        this.discountPrice = discountPrice;
-        this.userId = userId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(Integer discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 }
