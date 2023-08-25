@@ -5,12 +5,17 @@ import com.tc.training.jewelleryapplication.model.Cart;
 import com.tc.training.jewelleryapplication.model.CartItem;
 import com.tc.training.jewelleryapplication.model.Product;
 import com.tc.training.jewelleryapplication.model.User;
+import com.tc.training.jewelleryapplication.repository.CartItemRepository;
 import com.tc.training.jewelleryapplication.repository.CartRepository;
 import com.tc.training.jewelleryapplication.request.AddItemRequest;
 import com.tc.training.jewelleryapplication.service.CartItemService;
 import com.tc.training.jewelleryapplication.service.CartService;
 import com.tc.training.jewelleryapplication.service.ProductService;
+import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
+@Service
 public class CartServiceImplementation implements CartService {
 
     private CartRepository cartRepository;
@@ -37,6 +42,7 @@ public class CartServiceImplementation implements CartService {
     public String addCartItem(Long userId, AddItemRequest req) throws ProductException {
 
         Cart cart = cartRepository.findByUserId(userId);
+
         Product product = productService.findProductById(req.getProductId());
 
         CartItem isPresent=cartItemService.isCartItemExist(cart, product, req.getSize(), userId);
@@ -51,11 +57,14 @@ public class CartServiceImplementation implements CartService {
             cartItem.setPrice(price);
             cartItem.setSize(req.getSize());
 
-            CartItem createdCartItem = cartItemService.createItem(cartItem);
+            CartItem createdCartItem = cartItemService.createCartItem(cartItem);
+
             cart.getCartItems().add(createdCartItem);
+
         }
-        return "Item A dd to Cart";
+        return "Item Add to Cart";
     }
+
 
     @Override
     public Cart findUserCart(Long userId) {
@@ -66,15 +75,16 @@ public class CartServiceImplementation implements CartService {
         int totalItem = 0;
 
         for(CartItem cartItem : cart.getCartItems()){
-            totalPrice = totalPrice + cartItem.getPrice();
-            totalDiscountedPrice = totalDiscountedPrice + cartItem.getDiscountPrice();
-            totalItem = totalItem + cartItem.getQuantity();
+            totalPrice += cartItem.getPrice();
+            totalDiscountedPrice += cartItem.getDiscountPrice();
+            totalItem += cartItem.getQuantity();
         }
 
         cart.setTotalDiscountPrice(totalDiscountedPrice);
         cart.setTotalPrice(totalPrice);
-        cart.setTotalItem(totalItem);
+        cart.setTotalItem(cart.getCartItems().size());
         cart.setDiscount(totalPrice-totalDiscountedPrice);
+        cart.setTotalItem(totalItem);
 
         return cartRepository.save(cart);
     }

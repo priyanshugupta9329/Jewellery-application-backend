@@ -9,10 +9,13 @@ import com.tc.training.jewelleryapplication.repository.ReviewRepository;
 import com.tc.training.jewelleryapplication.request.ReviewRequest;
 import com.tc.training.jewelleryapplication.service.ProductService;
 import com.tc.training.jewelleryapplication.service.ReviewService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+
+@Service
 public class ReviewServiceImplementation implements ReviewService {
 
     private ReviewRepository reviewRepository;

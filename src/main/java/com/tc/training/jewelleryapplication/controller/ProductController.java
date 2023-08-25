@@ -4,6 +4,7 @@ package com.tc.training.jewelleryapplication.controller;
 import com.tc.training.jewelleryapplication.exception.ProductException;
 import com.tc.training.jewelleryapplication.model.Product;
 import com.tc.training.jewelleryapplication.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ProductController {
 
 
+    @Autowired
     private ProductService productService;
 
     @GetMapping("/products")

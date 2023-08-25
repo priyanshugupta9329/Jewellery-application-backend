@@ -29,5 +29,11 @@ public class CartItem {
     private Integer discountPrice;
     private Long userId;
 
+    @Override
+    public String toString() {
+        return "CartItem(id=" + id + ", product=" + product.getId() +
+                ", size=" + size + ", quantity=" + quantity +
+                ", price=" + price + ", discountPrice=" + discountPrice + ")";
+    }
 
 }
