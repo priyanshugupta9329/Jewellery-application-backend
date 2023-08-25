@@ -152,15 +152,4 @@ public class OrderServiceImplementation implements OrderService {
         return orderRepository.findAll();
     }
 
-//    @Override
-//    public void deleteOrder(Long orderId) throws OrderException {
-//
-//
-//    }
-//
-//    @Override
-//    public List<Order> getAllOrders() {
-//
-//        return null;
-//    }
 }
