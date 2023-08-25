@@ -34,5 +34,11 @@ public class Cart {
     private int totalDiscountPrice;
     private int discount;
 
+    @Override
+    public String toString() {
+        return "Cart(id=" + id + ", user=" + user.getId() +
+                ", totalPrice=" + totalPrice + ", totalItem=" + totalItem +
+                ", totalDiscountPrice=" + totalDiscountPrice + ", discount=" + discount + ")";
+    }
 
 }

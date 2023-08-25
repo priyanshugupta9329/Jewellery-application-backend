@@ -27,7 +27,7 @@ public class OrderController {
 
     @PostMapping("/")
     public ResponseEntity<Order> createOrder(@RequestBody Address shippingAddress,
-                                             @RequestHeader("Authorization") String jwt) throws UserException{
+                                             @RequestHeader("Authorization") String jwt) throws UserException, OrderException {
         User user = userService.findUserProfileByJwt(jwt);
 
         Order order = orderService.createOrder(user, shippingAddress);

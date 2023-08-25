@@ -53,4 +53,17 @@ public class User {
     private LocalDateTime createdAt;
 
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

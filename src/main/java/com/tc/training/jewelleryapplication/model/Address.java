@@ -43,5 +43,17 @@ public class Address {
 
     private String mobile;
 
-
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", streetAddress='" + streetAddress + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", mobile='" + mobile + '\'' +
+                '}';
+    }
 }

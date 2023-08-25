@@ -44,6 +44,6 @@ public class CartController {
         res.setMessage("item added to cart");
         res.setStatus(true);
 
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return new ResponseEntity<ApiResponse>(res, HttpStatus.ACCEPTED);
     }
 }
