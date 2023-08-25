@@ -3,10 +3,12 @@ package com.tc.training.jewelleryapplication.controller;
 
 import com.tc.training.jewelleryapplication.config.JwtProvider;
 import com.tc.training.jewelleryapplication.exception.UserException;
+import com.tc.training.jewelleryapplication.model.Cart;
 import com.tc.training.jewelleryapplication.model.User;
 import com.tc.training.jewelleryapplication.repository.UserRepository;
 import com.tc.training.jewelleryapplication.request.LoginRequest;
 import com.tc.training.jewelleryapplication.response.AuthResponse;
+import com.tc.training.jewelleryapplication.service.CartService;
 import com.tc.training.jewelleryapplication.service.Impl.CustomUserServiceImplementation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +35,14 @@ public class AuthController {
 
     private CustomUserServiceImplementation customUserService;
 
-    public AuthController(UserRepository userRepository, CustomUserServiceImplementation customUserService, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
+    private CartService cartService;
+
+    public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomUserServiceImplementation customUserService, CartService cartService) {
         this.userRepository = userRepository;
-        this.customUserService=customUserService;
-        this.passwordEncoder=passwordEncoder;
-        this.jwtProvider=jwtProvider;
+        this.jwtProvider = jwtProvider;
+        this.passwordEncoder = passwordEncoder;
+        this.customUserService = customUserService;
+        this.cartService = cartService;
     }
 
     @PostMapping("/signup")
@@ -61,6 +66,7 @@ public class AuthController {
         createdUser.setLastName(lastName);
 
         User savedUser=userRepository.save(createdUser);
+        Cart cart=cartService.createCart(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
 

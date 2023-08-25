@@ -33,5 +33,4 @@ public class OrderItem {
     private Long userId;
     private LocalDateTime deliveryDate;
 
-
 }

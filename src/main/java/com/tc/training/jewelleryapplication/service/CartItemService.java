@@ -8,7 +8,7 @@ import com.tc.training.jewelleryapplication.model.Product;
 
 public interface CartItemService {
 
-    public CartItem createItem(CartItem cartItem);
+    public CartItem createCartItem(CartItem cartItem);
     public CartItem updateCartItem(Long userId,Long id,CartItem cartItem) throws CartItemException, UserException;
     public CartItem isCartItemExist(Cart cart, Product product, String size, Long userId);
 

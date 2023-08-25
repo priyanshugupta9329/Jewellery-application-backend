@@ -1,9 +1,14 @@
 package com.tc.training.jewelleryapplication.model;
 
 import jakarta.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -43,5 +48,7 @@ public class Order {
 
     private int totalItem;
     private LocalDateTime createdAt;
+
+
 
 }
