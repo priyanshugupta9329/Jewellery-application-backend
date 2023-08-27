@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class RatingRequest {
 
-    private Long producrId;
+    private Long productId;
     private double rating;
 
 

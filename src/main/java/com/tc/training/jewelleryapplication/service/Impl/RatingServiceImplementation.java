@@ -28,7 +28,7 @@ public class RatingServiceImplementation implements RatingService {
     @Override
     public Rating createRating(RatingRequest req, User user) throws ProductException {
 
-        Product product = productService.findProductById(req.getProducrId());
+        Product product = productService.findProductById(req.getProductId());
         Rating rating =new Rating();
         rating.setProduct(product);
         rating.setUser(user);

@@ -60,10 +60,14 @@ public class CartServiceImplementation implements CartService {
             CartItem createdCartItem = cartItemService.createCartItem(cartItem);
 
             cart.getCartItems().add(createdCartItem);
+            cartRepository.save(cart);
 
         }
+
         return "Item Add to Cart";
     }
+
+
 
 
     @Override
