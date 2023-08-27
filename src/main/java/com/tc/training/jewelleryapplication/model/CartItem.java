@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -35,5 +37,25 @@ public class CartItem {
                 ", size=" + size + ", quantity=" + quantity +
                 ", price=" + price + ", discountPrice=" + discountPrice + ")";
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, price, product, size);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CartItem other = (CartItem) obj;
+        return Objects.equals(id, other.id) && Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
+                && Objects.equals(product, other.product) && Objects.equals(size, other.size);
+    }
+
+
 
 }

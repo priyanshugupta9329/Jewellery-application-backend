@@ -1,6 +1,7 @@
 package com.tc.training.jewelleryapplication.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tc.training.jewelleryapplication.user.domain.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +30,7 @@ public class User {
 
     private String email;
 
-    private String role;
+    private UserRole role;
 
     private String mobile;
 
@@ -61,9 +62,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", createdAt=" + createdAt +
                 '}';
     }
 }

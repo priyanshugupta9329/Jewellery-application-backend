@@ -1,11 +1,14 @@
 package com.tc.training.jewelleryapplication.service.Impl;
 
 import com.tc.training.jewelleryapplication.exception.ProductException;
+import com.tc.training.jewelleryapplication.model.CartItem;
 import com.tc.training.jewelleryapplication.model.Category;
+import com.tc.training.jewelleryapplication.model.Order;
 import com.tc.training.jewelleryapplication.model.Product;
 import com.tc.training.jewelleryapplication.repository.CategoryRepository;
 import com.tc.training.jewelleryapplication.repository.ProductRepository;
 import com.tc.training.jewelleryapplication.request.CreateProductRequest;
+import com.tc.training.jewelleryapplication.service.OrderService;
 import com.tc.training.jewelleryapplication.service.ProductService;
 import com.tc.training.jewelleryapplication.service.UserService;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,10 +29,13 @@ public class ProductServiceImplementation implements ProductService {
     private UserService userService;
     private CategoryRepository categoryRepository;
 
+
+
     public ProductServiceImplementation(ProductRepository productRepository, UserService userService, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.userService = userService;
         this.categoryRepository = categoryRepository;
+
     }
 
     @Override
@@ -154,4 +161,15 @@ public class ProductServiceImplementation implements ProductService {
         List<Product> products = productRepository.findAll();
         return products;
     }
+
+    @Override
+    public List<Product> recommendProductsByCategory(String category) {
+        // Implement the logic to fetch recommended products based on the provided category
+        // You can use the productRepository or any other approach to retrieve recommendations
+        // Return a list of recommended products
+        // For example:
+        return productRepository.findByCategoryName(category);
+    }
+
+
 }
