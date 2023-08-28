@@ -1,5 +1,7 @@
 package com.tc.training.jewelleryapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tc.training.jewelleryapplication.user.domain.OrderStatus;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -10,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import javax.print.attribute.Attribute;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +31,11 @@ public class Order {
     @Column(name="order_id")
     private String orderId;
 
+    @JsonIgnore
     @ManyToOne
     private User user;
+
+
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems=new ArrayList<>();
     private LocalDateTime orderDate;
@@ -44,11 +50,25 @@ public class Order {
     private double totalPrice;
     private Integer totalDiscountedPrice;
     private Integer discount;
-    private String orderStatus;
+    private OrderStatus orderStatus;
 
     private int totalItem;
     private LocalDateTime createdAt;
 
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderId='" + orderId + '\'' +
+                ", user=" + user +
+
+                ", totalPrice=" + totalPrice +
+                ", totalDiscountedPrice=" + totalDiscountedPrice +
+                ", discount=" + discount +
+
+                '}';
+    }
 
 
 }

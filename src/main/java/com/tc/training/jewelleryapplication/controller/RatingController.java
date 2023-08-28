@@ -26,7 +26,7 @@ public class RatingController {
     private RatingService ratingService;
 
     @PostMapping("/create")
-    public ResponseEntity<Rating> createRating(@RequestBody RatingRequest req, @RequestHeader("Authrization") String jwt) throws UserException, ProductException{
+    public ResponseEntity<Rating> createRating(@RequestBody RatingRequest req, @RequestHeader("Authorization") String jwt) throws UserException, ProductException{
         User user = userService.findUserProfileByJwt(jwt);
 
         Rating rating = ratingService.createRating(req,user);
@@ -36,7 +36,7 @@ public class RatingController {
 
 
     @GetMapping("/product/{productId}")
-    public ResponseEntity<List<Rating>> getProductsRating(@PathVariable Long productId, @RequestHeader("Authroization")String jwt)
+    public ResponseEntity<List<Rating>> getProductsRating(@PathVariable Long productId, @RequestHeader("Authorization")String jwt)
             throws UserException, ProductException{
 
         User user = userService.findUserProfileByJwt(jwt);

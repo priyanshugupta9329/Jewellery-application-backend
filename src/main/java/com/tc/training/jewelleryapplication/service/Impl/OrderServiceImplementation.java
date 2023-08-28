@@ -4,6 +4,8 @@ import com.tc.training.jewelleryapplication.exception.OrderException;
 import com.tc.training.jewelleryapplication.model.*;
 import com.tc.training.jewelleryapplication.repository.*;
 import com.tc.training.jewelleryapplication.service.*;
+import com.tc.training.jewelleryapplication.user.domain.OrderStatus;
+import com.tc.training.jewelleryapplication.user.domain.PaymentStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -66,8 +68,8 @@ public class OrderServiceImplementation implements OrderService {
 
         createdOrder.setShippingAddress(address);
         createdOrder.setOrderDate(LocalDateTime.now());
-        createdOrder.setOrderStatus("PENDING");
-        createdOrder.getPaymentDetails().setStatus("PENDING");
+        createdOrder.setOrderStatus(OrderStatus.PENDING);
+        createdOrder.getPaymentDetails().setStatus(PaymentStatus.PENDING);
         createdOrder.setCreatedAt(LocalDateTime.now());
 
         Order savedOrder = orderRepository.save(createdOrder);
@@ -101,8 +103,8 @@ public class OrderServiceImplementation implements OrderService {
     public Order placedOrder(Long orderId) throws OrderException {
 
         Order order = findOrderById(orderId);
-        order.setOrderStatus("PLACED");
-        order.getPaymentDetails().setStatus("COMPLETED");
+        order.setOrderStatus(OrderStatus.PLACED);
+        order.getPaymentDetails().setStatus(PaymentStatus.COMPLETED);
         return order;
 
     }
@@ -111,7 +113,7 @@ public class OrderServiceImplementation implements OrderService {
     public Order confirmedOrder(Long orderId) throws OrderException {
 
         Order order = findOrderById(orderId);
-        order.setOrderStatus("CONFIRMED");
+        order.setOrderStatus(OrderStatus.CONFIRMED);
         return orderRepository.save(order);
 
     }
@@ -120,21 +122,21 @@ public class OrderServiceImplementation implements OrderService {
     public Order shippedOrder(Long orderId) throws OrderException {
 
         Order order = findOrderById(orderId);
-        order.setOrderStatus("SHIPPED");
+        order.setOrderStatus(OrderStatus.SHIPPED);
         return orderRepository.save(order);
     }
 
     @Override
     public Order deliveredOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
-        order.setOrderStatus("DELIVERED");
+        order.setOrderStatus(OrderStatus.DELIVERED);
         return orderRepository.save(order);
     }
 
     @Override
     public Order cancledOrder(Long orderId) throws OrderException {
         Order order = findOrderById(orderId);
-        order.setOrderStatus("CANCELLED");
+        order.setOrderStatus(OrderStatus.CANCELLED);
         return orderRepository.save(order);
     }
 

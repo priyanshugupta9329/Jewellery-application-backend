@@ -5,6 +5,7 @@ import com.tc.training.jewelleryapplication.exception.OrderException;
 import com.tc.training.jewelleryapplication.exception.UserException;
 import com.tc.training.jewelleryapplication.model.Address;
 import com.tc.training.jewelleryapplication.model.Order;
+import com.tc.training.jewelleryapplication.model.Product;
 import com.tc.training.jewelleryapplication.model.User;
 import com.tc.training.jewelleryapplication.service.OrderService;
 import com.tc.training.jewelleryapplication.service.UserService;
@@ -58,5 +59,7 @@ public class OrderController {
 
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
+
+
 }
 
