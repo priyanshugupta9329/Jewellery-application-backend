@@ -3,6 +3,10 @@ package com.tc.training.jewelleryapplication.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tc.training.jewelleryapplication.user.domain.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,12 +26,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "First name is required")
+    @Size(min = 3, message = "First name must be at least 3 characters")
     private String firstName;
 
     private String lastName;
 
+    @NotBlank(message = "Password is required")
+    @Pattern(
+            regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,}$",
+            message = "Password must have at least 5 characters, including one uppercase letter, one lowercase letter, one digit, and one special character"
+    )
     private String password;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @Pattern(
+            regexp = ".*@gmail\\.com$",
+            message = "Email must be a Gmail address (ending with @gmail.com)"
+    )
     private String email;
 
     private UserRole role;
