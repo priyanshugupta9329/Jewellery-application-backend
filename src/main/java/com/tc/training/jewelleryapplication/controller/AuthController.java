@@ -10,6 +10,7 @@ import com.tc.training.jewelleryapplication.request.LoginRequest;
 import com.tc.training.jewelleryapplication.response.AuthResponse;
 import com.tc.training.jewelleryapplication.service.CartService;
 import com.tc.training.jewelleryapplication.service.Impl.CustomUserServiceImplementation;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -46,7 +47,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException{
+    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException{
 
         String email=user.getEmail();
         String password=user.getPassword();
@@ -83,7 +84,7 @@ public class AuthController {
 
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<AuthResponse> loginUserHandler(@Valid @RequestBody LoginRequest loginRequest){
 
         String username=loginRequest.getEmail();
         String password=loginRequest.getPassword();
