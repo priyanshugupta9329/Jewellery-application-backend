@@ -65,4 +65,27 @@ public class Product {
 
     private LocalDateTime createdAt;
 
+
+    @Column(name = "image_url2")
+    private String imageUrl2;
+
+    @Column(name = "image_url3")
+    private String imageUrl3;
+
+    @Column(name = "image_url4")
+    private String imageUrl4;
+
+    private String occasion;
+
+    private String material;
+
+    private String dimension;
+
+    private String weight;
+
+    private String collection;
+
+    private String careLabel;
+
+
 }

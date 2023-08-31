@@ -1,6 +1,7 @@
 package com.tc.training.jewelleryapplication.request;
 
 import com.tc.training.jewelleryapplication.model.Size;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,5 +30,26 @@ public class CreateProductRequest {
     private String secondLevelCategory;
 
     private String thirdLevelCategory;
+
+
+    private String imageUrl2;
+
+
+    private String imageUrl3;
+
+
+    private String imageUrl4;
+
+    private String occasion;
+
+    private String material;
+
+    private String dimension;
+
+    private String weight;
+
+    private String collection;
+
+    private String careLabel;
 
     }

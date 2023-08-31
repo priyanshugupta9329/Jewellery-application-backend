@@ -85,6 +85,16 @@ public class ProductServiceImplementation implements ProductService {
         product.setCategory(thirdLevel);
         product.setCreatedAt(LocalDateTime.now());
 
+        product.setImageUrl2(req.getImageUrl2());
+        product.setImageUrl3(req.getImageUrl3());
+        product.setImageUrl4(req.getImageUrl4());
+        product.setOccasion(req.getOccasion());
+        product.setMaterial(req.getMaterial());
+        product.setDimension(req.getDimension());
+        product.setWeight(req.getWeight());
+        product.setCollection(req.getCollection());
+        product.setCareLabel(req.getCareLabel());
+
         Product savedProduct=productRepository.save(product);
 
         return savedProduct;
@@ -164,11 +174,20 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public List<Product> recommendProductsByCategory(String category) {
-        // Implement the logic to fetch recommended products based on the provided category
-        // You can use the productRepository or any other approach to retrieve recommendations
-        // Return a list of recommended products
-        // For example:
+
         return productRepository.findByCategoryName(category);
+    }
+
+    @Override
+    public List<Product> searchProduct(String query) {
+        List<Product> products=productRepository.searchProduct(query);
+        return products;
+    }
+
+    @Override
+    public List<Product> newArrivalProducts() {
+        List<Product> products=productRepository.sortByCreatedAt();
+        return products;
     }
 
 

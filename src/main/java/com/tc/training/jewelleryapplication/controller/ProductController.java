@@ -38,12 +38,19 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.ACCEPTED);
     }
 
-//    @GetMapping("/products/search")
-//        public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String q){
-//
-//            List<Product> products = productService.searchProduct(q);
-//
-//            return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
-//        }
-//
+    @GetMapping("/products/search")
+        public ResponseEntity<List<Product>> searchProductHandler(@RequestParam String q){
+
+            List<Product> products = productService.searchProduct(q);
+
+            return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+        }
+
+    @GetMapping("/newArrival")
+    public ResponseEntity<List<Product>> newArrvialProducts(){
+        List<Product> products = productService.newArrivalProducts();
+
+        return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+    }
+
 }

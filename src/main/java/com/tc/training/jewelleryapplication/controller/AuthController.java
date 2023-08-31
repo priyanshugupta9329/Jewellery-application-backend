@@ -2,6 +2,7 @@ package com.tc.training.jewelleryapplication.controller;
 
 
 import com.tc.training.jewelleryapplication.config.JwtProvider;
+import com.tc.training.jewelleryapplication.email.EmailService;
 import com.tc.training.jewelleryapplication.exception.UserException;
 import com.tc.training.jewelleryapplication.model.Cart;
 import com.tc.training.jewelleryapplication.model.User;
@@ -11,6 +12,7 @@ import com.tc.training.jewelleryapplication.response.AuthResponse;
 import com.tc.training.jewelleryapplication.service.CartService;
 import com.tc.training.jewelleryapplication.service.Impl.CustomUserServiceImplementation;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,6 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -38,6 +45,9 @@ public class AuthController {
 
     private CartService cartService;
 
+    @Autowired
+    private EmailService emailService;
+
     public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomUserServiceImplementation customUserService, CartService cartService) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
@@ -47,7 +57,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException{
+    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException {
 
         String email=user.getEmail();
         String password=user.getPassword();
@@ -68,6 +78,20 @@ public class AuthController {
 
         User savedUser=userRepository.save(createdUser);
         Cart cart=cartService.createCart(savedUser);
+
+        // Send welcome email
+        String emailSubject = "Welcome to Our Jewellery Website";
+        String emailText = "Thank you for signing up!";
+
+        emailService.sendEmail(email, emailSubject, emailText);
+
+//        // Send welcome email with template
+//        String emailSubject = "Welcome to Our Platform";
+//        String templateName = "welcome-email"; // The name of your HTML template
+//        Map<String, Object> model = new HashMap<>();
+//        model.put("username", savedUser.getEmail()); // Change this to the actual field containing the username
+//        model.put("password", password); // Use the password variable you have
+//        emailService.sendEmail(email, emailSubject, templateName, model);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
 
