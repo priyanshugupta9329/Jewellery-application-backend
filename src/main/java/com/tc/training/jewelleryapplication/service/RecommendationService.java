@@ -8,4 +8,6 @@ import java.util.List;
 public interface RecommendationService {
 
     List<Product> generateRecommendations(Long userId) throws UserException;
+
+    public List<Product> generateRecommendationsForNewUser();
 }

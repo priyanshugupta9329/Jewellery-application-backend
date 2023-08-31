@@ -4,12 +4,11 @@ public enum ProductSubCategory {
 
     Earrings,
     Pendants,
-    Gold_Coin,
     Chains,
     Bangles,
     Finger_Rings,
     Mangalsutras,
-    Neckware,
+    Necklace,
     Bracelets,
     Nose_Pins,
     Pendant_Sets,

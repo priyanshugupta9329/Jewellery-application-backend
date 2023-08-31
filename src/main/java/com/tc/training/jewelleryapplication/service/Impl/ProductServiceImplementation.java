@@ -173,11 +173,20 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public List<Product> recommendProductsByCategory(String category) {
-        // Implement the logic to fetch recommended products based on the provided category
-        // You can use the productRepository or any other approach to retrieve recommendations
-        // Return a list of recommended products
-        // For example:
+
         return productRepository.findByCategoryName(category);
+    }
+
+    @Override
+    public List<Product> searchProduct(String query) {
+        List<Product> products=productRepository.searchProduct(query);
+        return products;
+    }
+
+    @Override
+    public List<Product> newArrivalProducts() {
+        List<Product> products=productRepository.sortByCreatedAt();
+        return products;
     }
 
 

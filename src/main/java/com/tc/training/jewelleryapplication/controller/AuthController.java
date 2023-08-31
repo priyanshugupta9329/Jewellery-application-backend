@@ -2,6 +2,7 @@ package com.tc.training.jewelleryapplication.controller;
 
 
 import com.tc.training.jewelleryapplication.config.JwtProvider;
+import com.tc.training.jewelleryapplication.email.EmailService;
 import com.tc.training.jewelleryapplication.exception.UserException;
 import com.tc.training.jewelleryapplication.model.Cart;
 import com.tc.training.jewelleryapplication.model.User;
@@ -10,7 +11,9 @@ import com.tc.training.jewelleryapplication.request.LoginRequest;
 import com.tc.training.jewelleryapplication.response.AuthResponse;
 import com.tc.training.jewelleryapplication.service.CartService;
 import com.tc.training.jewelleryapplication.service.Impl.CustomUserServiceImplementation;
+import freemarker.template.TemplateException;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,6 +26,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -38,6 +47,9 @@ public class AuthController {
 
     private CartService cartService;
 
+    @Autowired
+    private EmailService emailService;
+
     public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomUserServiceImplementation customUserService, CartService cartService) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
@@ -47,7 +59,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException{
+    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException, MessagingException, TemplateException, IOException, jakarta.mail.MessagingException {
 
         String email=user.getEmail();
         String password=user.getPassword();
@@ -68,6 +80,24 @@ public class AuthController {
 
         User savedUser=userRepository.save(createdUser);
         Cart cart=cartService.createCart(savedUser);
+
+//        // Send welcome email
+//        String emailSubject = "Welcome to Our Jewellery Website";
+//        String emailText = "Thank you for signing up!";
+//
+//        emailService.sendEmail(email, emailSubject, emailText);
+
+
+        // Send welcome email
+        String emailSubject = "Welcome to Our Jewellery Website";
+        String emailTemplate = "welcome-email"; // This should match the name of your FreeMarker template (without the extension)
+
+        Map<String, Object> emailModel = new HashMap<>();
+        emailModel.put("username", user.getEmail()); // Sending the email as username for demonstration purposes
+        emailModel.put("password", password); // Sending the password
+
+        emailService.sendEmailWithTemplate(email, emailSubject, emailTemplate, emailModel);
+
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
 
