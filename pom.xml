@@ -89,18 +89,18 @@
 			<scope>runtime</scope>
 		</dependency>
 
-<!--		&lt;!&ndash; JavaMail API &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>javax.mail</groupId>-->
-<!--			<artifactId>javax.mail-api</artifactId>-->
-<!--			<version>1.6.2</version>-->
-<!--		</dependency>-->
+		<!-- JavaMail API -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 
-<!--		&lt;!&ndash; Spring Boot Starter for FreeMarker &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-freemarker</artifactId>-->
-<!--		</dependency>-->
+		<!-- Spring Boot Starter for FreeMarker -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
 
 	</dependencies>
 

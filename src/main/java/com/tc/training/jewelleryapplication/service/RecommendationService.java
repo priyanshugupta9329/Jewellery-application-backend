@@ -9,5 +9,5 @@ public interface RecommendationService {
 
     List<Product> generateRecommendations(Long userId) throws UserException;
 
-//    public List<Product> generateRecommendationsForNewUser();
+    public List<Product> generateRecommendationsForNewUser();
 }

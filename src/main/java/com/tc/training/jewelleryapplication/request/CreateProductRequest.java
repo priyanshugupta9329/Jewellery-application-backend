@@ -1,12 +1,13 @@
 package com.tc.training.jewelleryapplication.request;
 
 import com.tc.training.jewelleryapplication.model.Size;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,31 +26,19 @@ public class CreateProductRequest {
     private Set<Size> size=new HashSet<>();
 
     private String imageUrl;
+    private String imageUrl1;
+    private String imageUrl2;
+    private String imageUrl3;
+
+    private String dimensions;
+    private String material;
+    private String weight;
+    private String occasion;
+    private List<String> features=new ArrayList<>();
     private String topLevelCategory;
 
     private String secondLevelCategory;
 
     private String thirdLevelCategory;
 
-
-    private String imageUrl2;
-
-
-    private String imageUrl3;
-
-
-    private String imageUrl4;
-
-    private String occasion;
-
-    private String material;
-
-    private String dimension;
-
-    private String weight;
-
-    private String collection;
-
-    private String careLabel;
-
-    }
+}

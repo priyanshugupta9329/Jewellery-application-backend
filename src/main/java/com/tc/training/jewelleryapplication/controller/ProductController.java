@@ -2,8 +2,12 @@ package com.tc.training.jewelleryapplication.controller;
 
 
 import com.tc.training.jewelleryapplication.exception.ProductException;
+import com.tc.training.jewelleryapplication.exception.UserException;
 import com.tc.training.jewelleryapplication.model.Product;
+import com.tc.training.jewelleryapplication.model.User;
 import com.tc.training.jewelleryapplication.service.ProductService;
+import com.tc.training.jewelleryapplication.service.RecommendationService;
+import com.tc.training.jewelleryapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -14,12 +18,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/public")
 public class ProductController {
 
 
     @Autowired
     private ProductService productService;
+
+
+    @Autowired
+    private RecommendationService recommendationService;
 
     @GetMapping("/products")
     public ResponseEntity<Page<Product>> findProductByCategoryHandler(@RequestParam String category,
@@ -53,4 +61,10 @@ public class ProductController {
         return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
     }
 
+    @GetMapping("/recommendation/")
+    public ResponseEntity<List<Product>> recommendationForNewUser() {
+
+        List<Product> products = recommendationService.generateRecommendationsForNewUser();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 }

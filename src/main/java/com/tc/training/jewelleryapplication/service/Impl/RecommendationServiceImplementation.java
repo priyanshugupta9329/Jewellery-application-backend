@@ -145,43 +145,43 @@ public class RecommendationServiceImplementation implements RecommendationServic
     }
 
 
-//    @Override
-//    public List<Product> generateRecommendationsForNewUser() {
-//        List<Product> recommendedProducts = new ArrayList<>();
-//        Map<String, Integer> categoryProductCount = new HashMap<>();
-//
-//
-//        List<String> randomCategories = getRandomCategories(2);
-//
-//        for (String category : randomCategories) {
-//            List<Product> categoryProducts = productService.recommendProductsByCategory(category);
-//
-//            if (relatedCategoriesMapping.containsKey(category)) {
-//                List<String> relatedCategories = relatedCategoriesMapping.get(category);
-//                for (String relatedCategory : relatedCategories) {
-//                    categoryProducts.addAll(productService.recommendProductsByCategory(relatedCategory));
-//                }
-//            }
-//
-//            int productsAdded = 0;
-//            for (Product product : categoryProducts) {
-//                if (productsAdded < 2) {
-//                    recommendedProducts.add(product);
-//                    productsAdded++;
-//                }
-//            }
-//
-//            categoryProductCount.put(category, productsAdded);
-//        }
-//
-//        return recommendedProducts;
-//    }
-//
-//    private List<String> getRandomCategories(int count) {
-//        List<String> allCategories = new ArrayList<>(relatedCategoriesMapping.keySet());
-//        Collections.shuffle(allCategories);
-//        return allCategories.subList(0, Math.min(count, allCategories.size()));
-//    }
+    @Override
+    public List<Product> generateRecommendationsForNewUser() {
+        List<Product> recommendedProducts = new ArrayList<>();
+        Map<String, Integer> categoryProductCount = new HashMap<>();
+
+
+        List<String> randomCategories = getRandomCategories(2);
+
+        for (String category : randomCategories) {
+            List<Product> categoryProducts = productService.recommendProductsByCategory(category);
+
+            if (relatedCategoriesMapping.containsKey(category)) {
+                List<String> relatedCategories = relatedCategoriesMapping.get(category);
+                for (String relatedCategory : relatedCategories) {
+                    categoryProducts.addAll(productService.recommendProductsByCategory(relatedCategory));
+                }
+            }
+
+            int productsAdded = 0;
+            for (Product product : categoryProducts) {
+                if (productsAdded < 3) {
+                    recommendedProducts.add(product);
+                    productsAdded++;
+                }
+            }
+
+            categoryProductCount.put(category, productsAdded);
+        }
+
+        return recommendedProducts;
+    }
+
+    private List<String> getRandomCategories(int count) {
+        List<String> allCategories = new ArrayList<>(relatedCategoriesMapping.keySet());
+        Collections.shuffle(allCategories);
+        return allCategories.subList(0, Math.min(count, allCategories.size()));
+    }
 
 
 

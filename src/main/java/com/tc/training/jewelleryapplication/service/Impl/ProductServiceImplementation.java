@@ -78,22 +78,21 @@ public class ProductServiceImplementation implements ProductService {
         product.setDiscountedPrice(req.getDiscountedPrice());
         product.setDiscountPercent(req.getDiscountPercent());
         product.setImageUrl(req.getImageUrl());
+        product.setImageUrl1(req.getImageUrl1());
+        product.setImageUrl2(req.getImageUrl2());
+        product.setImageUrl3(req.getImageUrl3());
+        product.setDimensions(req.getDimensions());
+        product.setMaterial(req.getMaterial());
+        product.setWeight(req.getWeight());
+        product.setOccasion(req.getOccasion());
+        product.setFeatures(req.getFeatures());
+
         product.setBrand(req.getBrand());
         product.setPrice(req.getPrice());
         product.setSizes(req.getSize());
         product.setQuantity(req.getQuantity());
         product.setCategory(thirdLevel);
         product.setCreatedAt(LocalDateTime.now());
-
-        product.setImageUrl2(req.getImageUrl2());
-        product.setImageUrl3(req.getImageUrl3());
-        product.setImageUrl4(req.getImageUrl4());
-        product.setOccasion(req.getOccasion());
-        product.setMaterial(req.getMaterial());
-        product.setDimension(req.getDimension());
-        product.setWeight(req.getWeight());
-        product.setCollection(req.getCollection());
-        product.setCareLabel(req.getCareLabel());
 
         Product savedProduct=productRepository.save(product);
 
