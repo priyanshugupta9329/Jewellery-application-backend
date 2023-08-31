@@ -50,6 +50,17 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
+    private String imageUrl1;
+    private String imageUrl2;
+    private String imageUrl3;
+
+    private String dimensions;
+    private String material;
+    private String weight;
+    private String occasion;
+    private List<String> features=new ArrayList<>();
+
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rating> ratings = new ArrayList<>();
 
