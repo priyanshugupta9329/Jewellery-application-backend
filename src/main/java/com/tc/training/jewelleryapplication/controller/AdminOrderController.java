@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/orders")
+@CrossOrigin
+@RequestMapping("/public/admin/orders")
 public class AdminOrderController {
 
     @Autowired
