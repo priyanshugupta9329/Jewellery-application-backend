@@ -107,6 +107,10 @@ public class RecommendationServiceImplementation implements RecommendationServic
     public List<Product> generateRecommendations(Long userId) throws UserException {
         List<Order> userOrders = orderRepository.getUsersOrders(userId);
 
+        if (userOrders.isEmpty()) {
+            return generateRecommendationsForNewUser();
+        }
+
         Set<String> categories = new HashSet<>();
         for (Order order : userOrders) {
             for (OrderItem orderItem : order.getOrderItems()) {
