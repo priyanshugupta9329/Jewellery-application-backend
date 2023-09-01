@@ -70,7 +70,7 @@ public class RecommendationServiceImplementation implements RecommendationServic
         relatedCategoriesMapping.put("Bracelet", Arrays.asList("Bangle"));
         relatedCategoriesMapping.put("Nose_Pin", Arrays.asList("Earring"));
         relatedCategoriesMapping.put("Pendant_Set", Arrays.asList("Earring", "Pendant", "Necklace"));
-        relatedCategoriesMapping.put("Engagement_Ring", Arrays.asList("Finger_Ring"));
+        relatedCategoriesMapping.put("Engagement_Ring", Arrays.asList("Finger_Ring", "Chain"));
 
 
     }
