@@ -28,7 +28,7 @@ public class PaymentController {
     @Value("${razorpay.api.key}")
     String  apiKey;
 
-    @Value("$ {razorpay.api.secret}")
+    @Value("${razorpay.api.secret}")
     String  apiSecret;
 
     @Autowired
@@ -40,7 +40,7 @@ public class PaymentController {
     @Autowired
     private OrderRepository orderRepository;
 
-    @PostMapping("/Payment/{orderId}")
+    @PostMapping("/payments/{orderId}")
     public ResponseEntity<PaymentLinkResponse> createPaymentLink(@PathVariable Long orderId, @RequestHeader("Authorization") String jwt) throws OrderException, RazorpayException {
         Order order= orderService.findOrderById(orderId);
 
@@ -53,7 +53,8 @@ public class PaymentController {
             paymentLinkRequest.put("currency","INR");
 
             JSONObject customer=new JSONObject();
-            customer.put("name",order.getUser().getFirstName());
+            customer.put("name",order.getUser().getFirstName() +" "+order.getUser().getLastName());
+            customer.put("contact",order.getUser().getMobile());
             customer.put("email",order.getUser().getEmail());
             paymentLinkRequest.put("customer",customer);
 
@@ -62,7 +63,7 @@ public class PaymentController {
             notify.put("email",true);
             paymentLinkRequest.put("notify",notify);
 
-            paymentLinkRequest.put("callback_url","http://localhost:3000/payment"+orderId);
+            paymentLinkRequest.put("callback_url","http://localhost:3000/payments"+orderId);
 
             paymentLinkRequest.put("callback_method","get");
 
@@ -70,15 +71,27 @@ public class PaymentController {
 
             String paymentLinkId=payment.get("id");
             String paymentLinkUrl=payment.get("short_url");
+            PaymentLinkResponse res=new PaymentLinkResponse(paymentLinkUrl,paymentLinkId);
 
-            PaymentLinkResponse res=new PaymentLinkResponse();
-            res.setPayment_link_id(paymentLinkId);
-            res.setPayment_link_url(paymentLinkUrl);
+            PaymentLink fetchedPayment = razorpay.paymentLink.fetch(paymentLinkId);
 
-            return new ResponseEntity<PaymentLinkResponse>(res, HttpStatus.CREATED);
+            order.setOrderId(fetchedPayment.get("order_id"));
+            orderRepository.save(order);
 
+// Print the payment link ID and URL
+            System.out.println("Payment link ID: " + paymentLinkId);
+            System.out.println("Payment link URL: " + paymentLinkUrl);
+            System.out.println("Order Id : "+fetchedPayment.get("order_id")+fetchedPayment);
 
+            return new ResponseEntity<PaymentLinkResponse>(res,HttpStatus.ACCEPTED);
+
+        } catch (RazorpayException e) {
+
+            System.out.println("Error creating payment link: " + e.getMessage());
+            throw new RazorpayException(e.getMessage());
         }
+
+
         catch (Exception e)
         {
             throw new RazorpayException(e.getMessage());
@@ -98,8 +111,8 @@ public class PaymentController {
             if(payment.get("status").equals("captured"))
             {
                 order.getPaymentDetails().setPaymentId(paymentId);
-                order.getPaymentDetails().setStatus(PaymentStatus.valueOf("COMPLETED"));
-                order.setOrderStatus(OrderStatus.valueOf("PLACED"));
+                order.getPaymentDetails().setStatus(PaymentStatus.COMPLETED);
+                order.setOrderStatus(OrderStatus.PLACED);
                 orderRepository.save(order);
             }
 
