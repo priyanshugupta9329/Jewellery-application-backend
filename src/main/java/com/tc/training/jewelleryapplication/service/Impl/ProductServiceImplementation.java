@@ -109,11 +109,76 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public Product updateProduct(Long productId, Product req) throws ProductException {
-        Product product=findProductById(productId);
-        if(req.getQuantity()!=0)
-        {
+//        Product product=findProductById(productId);
+//
+//
+//        if(req.getQuantity()!=0)
+//        {
+//            product.setQuantity(req.getQuantity());
+//        }
+//        return productRepository.save(product);
+
+
+        Product product = findProductById(productId);
+
+        if (req.getQuantity() != 0) {
             product.setQuantity(req.getQuantity());
         }
+
+
+        if (req.getPrice() != 0) {
+            product.setPrice(req.getPrice());
+        }
+        if (req.getDiscountedPrice() != 0) {
+            product.setDiscountedPrice(req.getDiscountedPrice());
+        }
+        if (req.getDiscountPercent() != 0) {
+            product.setDiscountPercent(req.getDiscountPercent());
+        }
+        if (req.getTitle() != null && !req.getTitle().isEmpty()) {
+            product.setTitle(req.getTitle());
+        }
+        if (req.getColor() != null && !req.getColor().isEmpty()) {
+            product.setColor(req.getColor());
+        }
+        if (req.getDescription() != null) {
+            product.setDescription(req.getDescription());
+        }
+        if (req.getImageUrl() != null && !req.getImageUrl().isEmpty()) {
+            product.setImageUrl(req.getImageUrl());
+        }
+        if (req.getImageUrl1() != null && !req.getImageUrl1().isEmpty()) {
+            product.setImageUrl1(req.getImageUrl1());
+        }
+        if (req.getImageUrl2() != null && !req.getImageUrl2().isEmpty()) {
+            product.setImageUrl2(req.getImageUrl2());
+        }
+        if (req.getImageUrl3() != null && !req.getImageUrl3().isEmpty()) {
+            product.setImageUrl3(req.getImageUrl3());
+        }
+
+        if (req.getDimensions() != null && !req.getDimensions().isEmpty()) {
+            product.setDimensions(req.getDimensions());
+        }
+        if (req.getMaterial() != null && !req.getMaterial().isEmpty()) {
+            product.setMaterial(req.getMaterial());
+        }
+        if (req.getWeight() != null && !req.getWeight().isEmpty()) {
+            product.setWeight(req.getWeight());
+        }
+        if (req.getOccasion() != null && !req.getOccasion().isEmpty()) {
+            product.setOccasion(req.getOccasion());
+        }
+        if (req.getFeatures() != null && !req.getFeatures().isEmpty()) {
+            product.setFeatures(req.getFeatures());
+        }
+        if (req.getBrand() != null && !req.getBrand().isEmpty()) {
+            product.setBrand(req.getBrand());
+        }
+        if (req.getSizes() != null && !req.getSizes().isEmpty()) {
+            product.setSizes(req.getSizes());
+        }
+
         return productRepository.save(product);
     }
 
