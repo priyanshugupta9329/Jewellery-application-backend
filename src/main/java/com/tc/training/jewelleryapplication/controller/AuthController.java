@@ -59,7 +59,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException, MessagingException, TemplateException, IOException, jakarta.mail.MessagingException {
+    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws Exception {
 
         String email=user.getEmail();
         String password=user.getPassword();
@@ -89,15 +89,17 @@ public class AuthController {
 
 
         // Send welcome email
-        String emailSubject = "Welcome to Our Jewellery Website";
-        String emailTemplate = "welcome-email"; // This should match the name of your FreeMarker template (without the extension)
+//        String emailSubject = "Welcome to Our Jewellery Website";
+//        String emailTemplate = "welcome-email"; // This should match the name of your FreeMarker template (without the extension)
+//
+//        Map<String, Object> emailModel = new HashMap<>();
+//        emailModel.put("username", user.getEmail()); // Sending the email as username for demonstration purposes
+//        emailModel.put("password", password); // Sending the password
+//
+//        emailService.sendEmailWithTemplate(email, emailSubject, emailTemplate, emailModel);
 
-        Map<String, Object> emailModel = new HashMap<>();
-        emailModel.put("username", user.getEmail()); // Sending the email as username for demonstration purposes
-        emailModel.put("password", password); // Sending the password
 
-        emailService.sendEmailWithTemplate(email, emailSubject, emailTemplate, emailModel);
-
+        emailService.sendHtmlEmail(user.getEmail(), user.getEmail(), password);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
 
