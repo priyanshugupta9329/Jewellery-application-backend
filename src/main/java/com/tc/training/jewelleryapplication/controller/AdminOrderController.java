@@ -27,28 +27,28 @@ public class AdminOrderController {
     }
 
     @PutMapping("/{orderId}/confirmed")
-    public ResponseEntity<Order> ConfirmedOrderHandler(@PathVariable Long orderId, @RequestHeader("Authorization") String jwt) throws OrderException{
+    public ResponseEntity<Order> ConfirmedOrderHandler(@PathVariable Long orderId) throws OrderException{
 
         Order order = orderService.confirmedOrder(orderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
     @PutMapping("/{orderId}/ship")
-    public ResponseEntity<Order> ShippedOrderHandler(@PathVariable Long orderId, @RequestHeader("Authorization") String jwt) throws OrderException{
+    public ResponseEntity<Order> ShippedOrderHandler(@PathVariable Long orderId) throws OrderException{
 
         Order order = orderService.shippedOrder(orderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
     @PutMapping("/{orderId}/deliver")
-    public ResponseEntity<Order> DeliverOrderHandler(@PathVariable Long orderId, @RequestHeader("Authorization") String jwt) throws OrderException{
+    public ResponseEntity<Order> DeliverOrderHandler(@PathVariable Long orderId) throws OrderException{
 
         Order order = orderService.deliveredOrder(orderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
     @PutMapping("/{orderId}/cancel")
-    public ResponseEntity<Order> CancelOrderHandler(@PathVariable Long orderId, @RequestHeader("Authorization") String jwt) throws OrderException{
+    public ResponseEntity<Order> CancelOrderHandler(@PathVariable Long orderId) throws OrderException{
 
         Order order = orderService.cancledOrder(orderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
